@@ -34,11 +34,6 @@ This is most useful if most of your recordings are unlikely to get matches at on
 One video will be added to the library for each VDR recording.
 The primary video title will be used to scrape metadata from online databases.
 
-Limitations
------------
-
-* Will only work with the newer ".ts" VDR recordings
-
 TODO
 ----
 
