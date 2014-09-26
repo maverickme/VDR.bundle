@@ -13,7 +13,9 @@ class vdr(Agent.Movies):
 	    video_path = String.Unquote(media.filename)
 	    folder_path = os.path.dirname(video_path)
 	
-    	    info_file = Core.storage.load(folder_path+"/info")
+    	    info_file = Core.storage.load(folder_path+"/info.vdr")
+    	    if not os.path.exists(info_file):
+		info_file = Core.storage.load(folder_path+"/info")
 
     	    title = re.search('^T (.*)$', info_file,re.M)
 	    if title:
@@ -32,7 +34,9 @@ class vdr(Agent.Movies):
                 video_path = media.items[0].parts[0].file
                 folder_path = os.path.dirname(video_path)
 
-		info_file = Core.storage.load(folder_path+"/info")
+		info_file = Core.storage.load(folder_path+"/info.vdr")
+		if not os.path.exists(info_file):
+		    info_file = Core.storage.load(folder_path+"/info")
     
     		channel = re.search('^C \S* (.*)$', info_file,re.M)
 		if channel:

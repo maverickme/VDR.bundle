@@ -14,7 +14,7 @@ def Scan(path, files, mediaList, subdirs):
 
     # Iterate through all the files
     for file in files:
-      if (file.endswith("/info")):
+      if (file.endswith("/info")) or (file.endswith("/info.vdr")):
         dir = os.path.dirname(file)
         infoFile = open(file).read()
         title = re.search('^T (.*)$', infoFile,re.M)
@@ -28,6 +28,12 @@ def Scan(path, files, mediaList, subdirs):
         for ts_filename in sorted(os.listdir(dir)):
           if (ts_filename.endswith(".ts")):
             if (ts_filename.endswith("00001.ts")):
+              movie.source = VideoFiles.RetrieveSource(dir+"/"+ts_filename)
+            movie.parts.append(dir+"/"+ts_filename)
+
+          match = re.search(r'\d\d\d\.vdr', ts_filename)
+          if match:
+            if (ts_filename.endswith("001.vdr")):
               movie.source = VideoFiles.RetrieveSource(dir+"/"+ts_filename)
             movie.parts.append(dir+"/"+ts_filename)
 
